@@ -3,7 +3,7 @@ import NotFound from './components/NotFound';
 import MainPage from './components/MainPage';
 import FolderPage from './components/FolderPage';
 import NotePage from './components/NotePage';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Link} from 'react-router-dom';
 import STORE from './dummy-store';
 
 
@@ -18,7 +18,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <h1>Noteful</h1>
+        <Link to="/"><h1>Noteful</h1></Link>
         <Switch>
           <Route exact path='/' render={() =>
              <MainPage
