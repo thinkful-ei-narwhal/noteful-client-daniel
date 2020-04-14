@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import BackButton from "./BackButton";
 import NoteList from './NoteList';
 import '../App.css';
 
@@ -17,7 +16,7 @@ export default class NotePage extends Component {
      return (
        <main>
          <section className="folderList">
-         <BackButton props={this.props}/>
+         <button onClick={() => this.props.history.goBack()}>GO BACK</button>
          <h2>{shownFolder.name}</h2>
          </section>
          <section className="noteList">
