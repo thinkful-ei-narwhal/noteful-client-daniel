@@ -3,10 +3,10 @@ import FolderList from "./FolderList";
 import NoteList from './NoteList';
 import '../App.css';
 
-export default class MainPage extends Component {
+export default class FolderPage extends Component {
   render() {
 
-    const folderNoteList = this.props.notes.filter(notes => notes.folderId === this.props.match.params.folderId)
+   const folderNoteList = this.props.notes.filter(notes => notes.folderId === this.props.match.params.folderId)
 
     return (
       <main>

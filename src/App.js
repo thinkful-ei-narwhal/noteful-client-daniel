@@ -24,8 +24,10 @@ export default class App extends Component {
              folders={this.state.folders}
              notes={this.state.notes}
             />} />
-            <Route exact path='/FolderLists/:folderId' render={() =>
+            <Route exact path='/FolderLists/:folderId' 
+              render={(routerProps) =>
               <FolderPage
+              {...routerProps}
               folders={this.state.folders}
               notes={this.state.notes}
              />} />
