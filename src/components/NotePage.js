@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FolderList from "./FolderList";
+import BackButton from "./BackButton";
 import NoteList from './NoteList';
 import '../App.css';
 
@@ -17,6 +17,7 @@ export default class NotePage extends Component {
      return (
        <main>
          <section className="folderList">
+         <BackButton props={this.props}/>
          <h2>{shownFolder.name}</h2>
          </section>
          <section className="noteList">
