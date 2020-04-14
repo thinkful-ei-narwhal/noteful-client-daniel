@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FolderList from "./components/FolderList";
 import NoteList from './components/NoteList';
+import NotFound from './components/NotFound';
+import {Route, Switch} from 'react-router-dom';
 import STORE from './dummy-store';
 
 
