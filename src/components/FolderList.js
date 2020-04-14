@@ -13,6 +13,7 @@ export default class FolderList extends Component {
     return (
       <div>
         {foldersList}
+        <button>add folder</button>
       </div>
     )
   }

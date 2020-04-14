@@ -4,6 +4,7 @@ import NoteList from './components/NoteList';
 import NotFound from './components/NotFound';
 import {Route, Switch} from 'react-router-dom';
 import STORE from './dummy-store';
+import './App.css';
 
 
 
@@ -18,14 +19,19 @@ export default class App extends Component {
     return (
       <div>
         <h1>Noteful</h1>
-        <Switch>
-        <Route exact path='/folder/:folder-id' render={() => <FolderList 
-          folders={this.state.folders} />} />
-        <Route exact path='/note/:note-id' render={() => <NoteList 
-          notes={this.state.notes} />} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
+        <main>
+        <section className="folderList">
+        <FolderList 
+        folders={this.state.folders}
+        />
+        </section>
+        <section className="noteList ">
+        <NoteList 
+        notes={this.state.notes}
+      />
+      </section>
+      </main>
+    </div>
     )
   }
 }
