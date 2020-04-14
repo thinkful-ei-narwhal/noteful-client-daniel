@@ -16,7 +16,7 @@ export default class NotePage extends Component {
      return (
        <main>
          <section className="folderList">
-         <button onClick={() => this.props.history.goBack()}>GO BACK</button>
+         <button onClick={() => this.props.history.goBack()}><h2>BACK</h2></button>
          <h2>{shownFolder.name}</h2>
          </section>
          <section className="noteList">
