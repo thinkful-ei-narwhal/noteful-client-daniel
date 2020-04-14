@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
+import "./Folder.css"
 
 export default class Folder extends Component {
   render() {
     return (
-      <div key={this.props.id}>
+      <button key={this.props.id} className="buttonFolder">
         <h3>{this.props.name}</h3>
-      </div>
+      </button>
     )
   }
 }

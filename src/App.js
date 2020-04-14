@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import FolderList from "./components/FolderList";
 import NoteList from './components/NoteList';
 import STORE from './dummy-store';
+import './App.css';
 
 
 
@@ -16,12 +17,18 @@ export default class App extends Component {
     return (
       <div>
         <h1>Noteful</h1>
+        <main>
+        <section className="folderList">
         <FolderList 
         folders={this.state.folders}
         />
+        </section>
+        <section className="noteList ">
         <NoteList 
-      notes={this.state.notes}
+        notes={this.state.notes}
       />
+      </section>
+      </main>
     </div>
     )
   }
