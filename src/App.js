@@ -16,14 +16,13 @@ export default class App extends Component {
     return (
       <div>
         <h1>Noteful</h1>
-        <Switch>
-        <Route exact path='/folder/:folder-id' render={() => <FolderList 
-          folders={this.state.folders} />} />
-        <Route exact path='/note/:note-id' render={() => <NoteList 
-          notes={this.state.notes} />} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
+        <FolderList 
+        folders={this.state.folders}
+        />
+        <NoteList 
+      notes={this.state.notes}
+      />
+    </div>
     )
   }
 }
