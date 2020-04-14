@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NotFound from './components/NotFound';
 import MainPage from './components/MainPage';
 import FolderPage from './components/FolderPage';
+import NotePage from './components/NotePage';
 import {Route, Switch} from 'react-router-dom';
 import STORE from './dummy-store';
 
@@ -27,6 +28,13 @@ export default class App extends Component {
             <Route exact path='/FolderLists/:folderId' 
               render={(routerProps) =>
               <FolderPage
+              {...routerProps}
+              folders={this.state.folders}
+              notes={this.state.notes}
+             />} />
+             <Route exact path='/Notes/:noteId' 
+              render={(routerProps) =>
+              <NotePage
               {...routerProps}
               folders={this.state.folders}
               notes={this.state.notes}
