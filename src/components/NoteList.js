@@ -7,12 +7,13 @@ export default class NoteList extends Component {
 
     const notesList = this.props.notes.map(note => {
 
-      return <Note 
-      key={note.id} 
+      return (<Note 
+      id={note.id} 
       name={note.name} 
       modified={note.modified}
       folderID={note.folderID}
       content={note.content}/>
+      )
     })
 
     return (
