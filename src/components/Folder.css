@@ -4,6 +4,10 @@
     margin: 5px;
 }
 
+
 .active{
-    color: rgb(0, 247, 255);
+    display: block;
+    border: solid 1px black;
+    background-color: rgb(8, 235, 224);
 }
+

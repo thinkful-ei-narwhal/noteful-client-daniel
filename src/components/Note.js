@@ -4,15 +4,15 @@ import "./Note.css"
 
 export default class Note extends Component {
   render() {
+    const modified= new Date(this.props.modified);
     return (
       <div key={this.props.id} className= "note">
       <Link to= {`/Notes/${this.props.id}`}>
         <h2>{this.props.name}</h2>
       </Link>
-        <p>{this.props.modified}</p><button>Delete Note</button>
-      </div>
-
-      
+      <p>modified on:{modified.getDate()}/{modified.getMonth()}/{modified.getFullYear()}</p>
+        <button>Delete Note</button>
+      </div> 
     )
   }
 }
