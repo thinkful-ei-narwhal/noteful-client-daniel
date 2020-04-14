@@ -16,6 +16,7 @@ export default class MainPage extends Component {
         <NoteList 
         notes={this.props.notes}
         />
+        <button>Add notes</button>
         </section>
       </main>
     )

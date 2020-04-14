@@ -19,7 +19,6 @@ export default class NoteList extends Component {
     return (
       <div>
         {notesList}
-        <button>Add notes</button>
       </div>
     )
   }

@@ -6,23 +6,24 @@ import '../App.css';
 export default class NotePage extends Component {
   render() {
 
-    const shownFolder = this.props.folders.find(folder => folder.id === this.props.match.params.folderId);
- 
-    console.log(shownFolder);
     
-    const folderNoteList = this.props.notes.filter(notes => notes.folderId === this.props.match.params.folderId);
+
+    const shownNote= this.props.notes.find(note => note.id === this.props.match.params.noteId);
+    
+    console.log(shownNote);
     
      return (
        <main>
          <section className="folderList">
          <FolderList 
-         folders={shownFolder}
+         folders={this.props.folders}
          />
          </section>
          <section className="noteList ">
          <NoteList 
-         notes={folderNoteList}
+         notes={[shownNote]}
          />
+         <p>{shownNote.content}</p>
          </section>
        </main>
      )

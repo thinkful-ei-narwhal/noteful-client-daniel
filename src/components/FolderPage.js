@@ -19,6 +19,7 @@ export default class FolderPage extends Component {
         <NoteList 
         notes={folderNoteList}
         />
+        <button>Add notes</button>
         </section>
       </main>
     )
