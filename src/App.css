@@ -2,23 +2,17 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 main{
   display: flex;
   flex-direction: row;
 }
+
 h1{
   text-align: center;
 }
 
 section{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 10px;
 }
 
 .folderList{

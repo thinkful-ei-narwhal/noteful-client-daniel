@@ -17,7 +17,7 @@ export default class NoteList extends Component {
     })
 
     return (
-      <div>
+      <div className="notesList">
         {notesList}
       </div>
     )

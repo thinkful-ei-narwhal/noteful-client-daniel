@@ -1,6 +1,7 @@
 .buttonFolder{
     width: 100%;
     border: solid 1px black;
+    margin: 5px;
 }
 
 .active{
