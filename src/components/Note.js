@@ -9,8 +9,6 @@ export default class Note extends Component {
 
   render() {
 
-    console.log(this.props.id);
-
     const {onDelete} = this.context;
 
     const modified= new Date(this.props.modified);
@@ -20,7 +18,10 @@ export default class Note extends Component {
         <h2>{this.props.name}</h2>
       </Link>
       <p>modified on:{modified.getDate()}/{modified.getMonth()}/{modified.getFullYear()}</p>
-        <button onClick={() => onDelete(this.props.id)}>Delete Note</button>
+        <button onClick={() => {
+          this.props.history.push('/');
+          onDelete(this.props.id)}
+        }>Delete Note</button>
       </div> 
     )
   }

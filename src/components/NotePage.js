@@ -15,8 +15,6 @@ export default class NotePage extends Component {
 
     const shownFolder = folders.find(folder => folder.id === shownNote.folderId);
     
-    console.log(shownNote);
-    
      return (
        <main>
          <section className="folderList">
@@ -26,6 +24,7 @@ export default class NotePage extends Component {
          <section className="noteList">
          <NoteList 
          notes={[shownNote]}
+        history={this.props.history}
          />
          <p>{shownNote.content}</p>
          </section>

@@ -16,29 +16,59 @@ export default class App extends Component {
   }
 
   componentDidMount() {
+    let error;
     fetch('http://localhost:9090/folders')
-      .then(res => res.json())
-      .then(folders => this.setState({folders: folders}));
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+
+        return data})
+      .then(folders => this.setState({folders: folders}))
+      .catch((err) => {
+        console.log(err);
+      });
 
     fetch('http://localhost:9090/notes')
-      .then(res => res.json())
-      .then(notes => this.setState({notes: notes}));
+      .then(res => {
+        if (!res.ok) {
+          error = { code: res.status};
+        }
+        return res.json();
+      })
+      .then(data => {
+        if (error) {
+          error.message = data.message;
+          return Promise.reject(error);
+        }
+
+        return data})
+      .then(notes => this.setState({notes: notes}))
+      .catch((err) => {
+        console.log(err);
+      });
 
   }
 
   handleDeleteItem = (id) => {
-
-    console.log(id);
 
     const options = {
       method: 'DELETE',
     };
     fetch(`http://localhost:9090/notes/${id}`, options)
       .then(res => res.json())
-      .then(notes => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
+      .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
 
   render() { // so we made context.  When we use component={component}, that automatically creates render props.  they are still props.
+
     return (
       <UserContext.Provider value = {{
         folders: this.state.folders,
@@ -49,7 +79,7 @@ export default class App extends Component {
         <Link to="/"><h1>Noteful</h1></Link>
         <Switch>
           <Route exact path='/' 
-             component={MainPage} 
+            component={MainPage} 
             />
           <Route exact path='/FolderLists/:folderId' 
             component={FolderPage}

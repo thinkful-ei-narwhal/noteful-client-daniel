@@ -12,7 +12,8 @@ export default class NoteList extends Component {
       name={note.name} 
       modified={note.modified}
       folderID={note.folderID}
-      content={note.content}/>
+      content={note.content}
+      history={this.props.history}/>
       )
     })
 

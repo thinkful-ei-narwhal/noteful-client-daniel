@@ -10,9 +10,9 @@ export default class FolderPage extends Component {
 
   render() {
 
-  const {notes} = this.context;
+    const {notes} = this.context;
 
-   const folderNoteList = notes.filter(notes => notes.folderId === this.props.match.params.folderId)
+    const folderNoteList = notes.filter(notes => notes.folderId === this.props.match.params.folderId)
 
     return (
       <main>
@@ -21,6 +21,7 @@ export default class FolderPage extends Component {
         </section>
         <section className="noteList ">
         <NoteList 
+        history={this.props.history}
         notes={folderNoteList}
         />
         <button>Add notes</button>
