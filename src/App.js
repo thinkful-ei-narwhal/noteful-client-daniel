@@ -27,14 +27,23 @@ export default class App extends Component {
   }
 
   handleDeleteItem = (id) => {
-    return id;
+
+    console.log(id);
+
+    const options = {
+      method: 'DELETE',
+    };
+    fetch(`http://localhost:9090/notes/${id}`, options)
+      .then(res => res.json())
+      .then(notes => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
 
   render() { // so we made context.  When we use component={component}, that automatically creates render props.  they are still props.
     return (
       <UserContext.Provider value = {{
         folders: this.state.folders,
-        notes: this.state.notes
+        notes: this.state.notes,
+        onDelete: this.handleDeleteItem,
       }}>
       <div>
         <Link to="/"><h1>Noteful</h1></Link>
