@@ -24,7 +24,7 @@ export default class NotePage extends Component {
          <section className="noteList">
          <NoteList 
          notes={[shownNote]}
-        history={this.props.history}
+         history={this.props.history}
          />
          <p>{shownNote.content}</p>
          </section>
