@@ -4,44 +4,54 @@ import MainPage from './components/MainPage';
 import FolderPage from './components/FolderPage';
 import NotePage from './components/NotePage';
 import {Route, Switch, Link} from 'react-router-dom';
-import STORE from './dummy-store';
+import UserContext from './UserContext';
 
 
 
 export default class App extends Component {
 
   state = {
-    folders: STORE.folders,
-    notes: STORE.notes,
+    folders: [],
+    notes: [],
   }
 
-  render() {
+  componentDidMount() {
+    fetch('http://localhost:9090/folders')
+      .then(res => res.json())
+      .then(folders => this.setState({folders: folders}));
+
+    fetch('http://localhost:9090/notes')
+      .then(res => res.json())
+      .then(notes => this.setState({notes: notes}));
+
+  }
+
+  handleDeleteItem = (id) => {
+    return id;
+  }
+
+  render() { // so we made context.  When we use component={component}, that automatically creates render props.  they are still props.
     return (
+      <UserContext.Provider value = {{
+        folders: this.state.folders,
+        notes: this.state.notes
+      }}>
       <div>
         <Link to="/"><h1>Noteful</h1></Link>
         <Switch>
-          <Route exact path='/' render={() =>
-             <MainPage
-             folders={this.state.folders}
-             notes={this.state.notes}
-            />} />
-            <Route exact path='/FolderLists/:folderId' 
-              render={(routerProps) =>
-              <FolderPage
-              {...routerProps}
-              folders={this.state.folders}
-              notes={this.state.notes}
-             />} />
-             <Route exact path='/Notes/:noteId' 
-              render={(routerProps) =>
-              <NotePage
-              {...routerProps}
-              folders={this.state.folders}
-              notes={this.state.notes}
-             />} />
+          <Route exact path='/' 
+             component={MainPage} 
+            />
+          <Route exact path='/FolderLists/:folderId' 
+            component={FolderPage}
+            />
+          <Route exact path='/Notes/:noteId' 
+            component={NotePage}
+            />
           <Route component={NotFound} />
         </Switch>
     </div>
+    </UserContext.Provider>
     )
   }
 }
