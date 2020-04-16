@@ -9,7 +9,8 @@ export default class AddFolder extends Component {
 
     const {
       folderName,
-      setFolderName
+      setFolderName,
+      validateFolderName,
      } = this.context;
 
 
@@ -17,6 +18,7 @@ export default class AddFolder extends Component {
       <div>
         <form name="folder-form" id ="folder-form">
         <label for="folder-name">Name of New Folder:</label><br />
+        {folderName.touched && <p className="error">{validateFolderName()}</p>}
         <input type="text" id="folder-name" name="folder-name" value={folderName.value} onChange={e => setFolderName(e.target.value)}/><br />
         <button>Submit</button> {/* an onSubmit goes here!*/}
         </form>

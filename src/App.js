@@ -64,6 +64,8 @@ export default class App extends Component {
 
   }
 
+  // State Input Update functions
+
   setFolderName = folderName => {
     this.setState({folderName: {value: folderName, touched: true}});
   };
@@ -80,6 +82,49 @@ export default class App extends Component {
     this.setState({folderTo: {value: folderTo, touched: true}});
   };
 
+  // Validate State functions
+
+  validateFolderName = () => {
+    let folderName= this.state.folderName.value;
+    folderName = folderName.toString().trim();
+    if (folderName.length < 3) {
+      // Check if it's at least 3 characters long
+      return 'Note name must be at least 3 characters long';
+    }
+  }
+
+  validateNoteName = () => {
+    let noteName= this.state.noteName.value;
+    noteName = noteName.toString().trim();
+    if (noteName.length < 3) {
+        // Check if it's at least 3 characters long
+        return 'Note name must be at least 3 characters long';
+    }
+  }
+
+  validateNoteContent = () => {
+    let noteContent= this.state.noteContent.value;
+    noteContent = noteContent.toString().trim();
+    if (noteContent.length < 3) {
+        // Check if it's at least 3 characters long
+        return 'Note content must be at least 3 characters long';
+    }
+  }
+
+  validateFolderTo = () => {
+    let folderTo= this.state.folderTo.value;
+    folderTo = folderTo.toString().trim();
+    if (!this.state.folders.includes({name: folderTo})) {
+      return `
+      Folder name must match an existing folder!
+      Current list of folders: ${this.state.folders.forEach(folder => `${folder.name}`)}
+      `;
+    }
+  }
+
+
+  // Event Handlers/API calls
+
   handleDeleteItem = (id) => {
 
     const options = {
@@ -89,6 +134,7 @@ export default class App extends Component {
       .then(res => res.json())
       .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
+
 
   render() { // so we made context.  When we use component={component}, that automatically creates render props.  they are still props.
 
@@ -104,6 +150,10 @@ export default class App extends Component {
         setNoteName: this.setNoteName,
         setNoteContent: this.setNoteContent,
         setFolderTo: this.setFolderTo,
+        validateFolderName: this.validateFolderName,
+        validateNoteName: this.validateNoteName,
+        validateNoteContent: this.validateNoteContent,
+        validateFolderTo: this.validateFolderTo,
         onDelete: this.handleDeleteItem,
       }}>
       <div>
