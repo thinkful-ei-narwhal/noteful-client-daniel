@@ -16,6 +16,10 @@ export default class App extends Component {
   state = {
     folders: [],
     notes: [],
+    folderName: {value: '', touched: false},
+    noteName: {value: '', touched: false},
+    noteContent: {value: '', touched: false},
+    folderTo: {value: '', touched: false},
   }
 
   componentDidMount() {
@@ -60,6 +64,22 @@ export default class App extends Component {
 
   }
 
+  setFolderName = folderName => {
+    this.setState({folderName: {value: folderName, touched: true}});
+  };
+
+  setNoteName = noteName => {
+    this.setState({noteName: {value: noteName, touched: true}});
+  };
+
+  setNoteContent = noteContent => {
+    this.setState({noteContent: {value: noteContent, touched: true}});
+  };
+
+  setFolderTo = folderTo => {
+    this.setState({folderTo: {value: folderTo, touched: true}});
+  };
+
   handleDeleteItem = (id) => {
 
     const options = {
@@ -76,6 +96,14 @@ export default class App extends Component {
       <UserContext.Provider value = {{
         folders: this.state.folders,
         notes: this.state.notes,
+        folderName: this.state.folderName,
+        noteName: this.state.noteName,
+        noteContent: this.state.noteContent,
+        folderTo: this.state.folderTo,
+        setFolderName: this.setFolderName,
+        setNoteName: this.setNoteName,
+        setNoteContent: this.setNoteContent,
+        setFolderTo: this.setFolderTo,
         onDelete: this.handleDeleteItem,
       }}>
       <div>
