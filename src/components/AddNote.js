@@ -9,6 +9,7 @@ export default class AddNote extends Component {
   render() {
 
     const {
+      folders,
       noteName, 
       folderTo, 
       noteContent,
@@ -16,10 +17,16 @@ export default class AddNote extends Component {
       setNoteContent,
       setFolderTo,
       validateNoteName,
-      validateFolderTo,
       validateNoteContent,
       onPostNote,
      } = this.context;
+
+     const options = folders.map(folder => {
+
+        return (<option value={folder.name}>{folder.name}</option>)
+     })
+
+     console.log(options);
 
     return (
       <div className="add-note">
@@ -28,15 +35,15 @@ export default class AddNote extends Component {
           {noteName.touched && <p className="error">{validateNoteName()}</p>}
           <input type="text" id="note-name" name="note-name" value={noteName.value} onChange={e => setNoteName(e.target.value)}/><br />
           <label htmlFor="for-folder">For Folder:</label><br />
-          {folderTo.touched && <p className="error">{validateFolderTo()}</p>}
-          <input type="text" id="for-folder" name="for-folder" value={folderTo.value} onChange={e => setFolderTo(e.target.value)}/><br />
+          <select name="for-folder" id="for-folder" value={folderTo.value} onChange={e => setFolderTo(e.target.value)}> 
+       			{options}
+					</select> 
           <label htmlFor="note-content">Content:</label><br />
           {noteContent.touched && <p className="error">{validateNoteContent()}</p>}
-          <textarea id="note-content" name="note-content" rows="4" cols="50" value={noteContent.value} onChange={e => setNoteContent(e.target.value)}/><br />
+          <textarea id="note-content" name="note-content" value={noteContent.value} onChange={e => setNoteContent(e.target.value)}/><br />
           <button className="submit-form"
             disabled={
             validateNoteName() ||
-            validateFolderTo() ||
             validateNoteContent()
             }
             onClick={() => {

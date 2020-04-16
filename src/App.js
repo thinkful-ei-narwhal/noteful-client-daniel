@@ -90,6 +90,9 @@ export default class App extends Component {
     if (folderName.length < 3) {
       // Check if it's at least 3 characters long
       return 'Note name must be at least 3 characters long';
+    } else if (/<|>|[/]/.test(folderName)) {
+      //checking to see if someone tried to put in script tags
+      return 'How DARE you try to put HTML/script tags in my form!!!';
     }
   }
 
@@ -99,7 +102,10 @@ export default class App extends Component {
     if (noteName.length < 3) {
         // Check if it's at least 3 characters long
         return 'Note name must be at least 3 characters long';
-    }
+    } else if (/<|>|[/]/.test(noteName)) {
+        //checking to see if someone tried to put in script tags
+        return 'How DARE you try to put HTML/script tags in my form!!!';
+      }
   }
 
   validateNoteContent = () => {
@@ -108,21 +114,9 @@ export default class App extends Component {
     if (noteContent.length < 3) {
         // Check if it's at least 3 characters long
         return 'Note content must be at least 3 characters long';
-    }
-  }
-
-  validateFolderTo = () => {
-
-    const nameList = this.state.folders.map(folder => folder.name);
-    let nameString = nameList.join(', ');
-
-    let folderTo= this.state.folderTo.value;
-    folderTo = folderTo.toString().trim();
-    if (!nameList.includes(folderTo)) {
-      return `
-      Folder name must match an existing folder!
-      Current list of folders: ${nameString}
-      `;
+    } else if (/<|>|[/]/.test(noteContent)) {
+        //checking to see if someone tried to put in script tags
+        return 'How DARE you try to put HTML/script tags in my form!!!';
     }
   }
 
@@ -197,7 +191,6 @@ export default class App extends Component {
         validateFolderName: this.validateFolderName,
         validateNoteName: this.validateNoteName,
         validateNoteContent: this.validateNoteContent,
-        validateFolderTo: this.validateFolderTo,
         onPostNote: this.handlePostNote,
         onPostFolder: this.handlePostFolder,
         onDelete: this.handleDeleteItem,
