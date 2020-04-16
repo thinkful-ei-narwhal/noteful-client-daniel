@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import UserContext from '../UserContext';
 import "./Note.css"
 
@@ -27,3 +28,11 @@ export default class Note extends Component {
   }
 }
 
+Note.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  modified: PropTypes.string,
+  folderID: PropTypes.string,
+  content: PropTypes.string,
+  history: PropTypes.object,
+}

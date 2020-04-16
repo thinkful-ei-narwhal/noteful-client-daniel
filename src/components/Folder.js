@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {NavLink} from 'react-router-dom';
+import PropTypes from 'prop-types';
 import "./Folder.css"
 
 export default class Folder extends Component {
@@ -11,4 +12,7 @@ export default class Folder extends Component {
   }
 }
 
-
+Folder.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+}

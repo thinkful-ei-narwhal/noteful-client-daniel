@@ -6,7 +6,7 @@ import NotePage from './components/NotePage';
 import AddFolder from './components/AddFolder';
 import AddNote from './components/AddNote';
 import ErrorPage from './components/ErrorPage';
-import {Route, Switch, Link, withRouter} from 'react-router-dom';
+import {Route, Switch, Link} from 'react-router-dom';
 import UserContext from './UserContext';
 
 
