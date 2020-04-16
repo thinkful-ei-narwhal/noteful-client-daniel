@@ -112,12 +112,16 @@ export default class App extends Component {
   }
 
   validateFolderTo = () => {
+
+    const nameList = this.state.folders.map(folder => folder.name);
+    let nameString = nameList.join(', ');
+
     let folderTo= this.state.folderTo.value;
     folderTo = folderTo.toString().trim();
-    if (!this.state.folders.includes({name: folderTo})) {
+    if (!nameList.includes(folderTo)) {
       return `
       Folder name must match an existing folder!
-      Current list of folders: ${this.state.folders.forEach(folder => `${folder.name}`)}
+      Current list of folders: ${nameString}
       `;
     }
   }
@@ -133,6 +137,46 @@ export default class App extends Component {
     fetch(`http://localhost:9090/notes/${id}`, options)
       .then(res => res.json())
       .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
+  }
+
+  handlePostNote = () => {
+    const name = this.state.noteName.value;
+    const content = this.state.noteContent.value;
+    const folderName = this.state.folderTo.value;
+    const folderId = this.state.folders.find(folder => folder.name === folderName).id;
+    const date = new Date();
+    const modified = date.toString();
+    console.log(folderId);
+    const post = JSON.stringify({name, content, modified, folderId});
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        },
+      body: post,
+    };
+    fetch(`http://localhost:9090/notes/`, options)
+      .then(res => res.json())
+      .then(() => this.setState({notes: [...this.state.notes, {name, content, modified, folderId}]}));
+      
+  }
+
+  handlePostFolder = () => {
+    let name = this.state.folderName.value;
+    let newname = JSON.stringify({name});
+    console.log(newname)
+    const options = {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json'
+      },
+      body: newname,
+    };
+    fetch(`http://localhost:9090/folders/`, options)
+      .then(res => res.json())
+      .then(() => this.setState({folders: [...this.state.folders, {name}]}));
+      
   }
 
 
@@ -154,6 +198,8 @@ export default class App extends Component {
         validateNoteName: this.validateNoteName,
         validateNoteContent: this.validateNoteContent,
         validateFolderTo: this.validateFolderTo,
+        onPostNote: this.handlePostNote,
+        onPostFolder: this.handlePostFolder,
         onDelete: this.handleDeleteItem,
       }}>
       <div>
