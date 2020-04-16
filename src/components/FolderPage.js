@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FolderList from "./FolderList";
 import NoteList from './NoteList';
+import {Link} from 'react-router-dom';
 import UserContext from '../UserContext';
 import '../App.css';
 
@@ -24,7 +25,7 @@ export default class FolderPage extends Component {
         history={this.props.history}
         notes={folderNoteList}
         />
-        <button>Add notes</button>
+        <button><Link to="/NoteForm">Add A Note</Link></button>
         </section>
       </main>
     )

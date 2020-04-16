@@ -3,6 +3,9 @@ import NotFound from './components/NotFound';
 import MainPage from './components/MainPage';
 import FolderPage from './components/FolderPage';
 import NotePage from './components/NotePage';
+import AddFolder from './components/AddFolder';
+import AddNote from './components/AddNote';
+import ErrorPage from './components/ErrorPage';
 import {Route, Switch, Link, withRouter} from 'react-router-dom';
 import UserContext from './UserContext';
 
@@ -77,6 +80,7 @@ export default class App extends Component {
       }}>
       <div>
         <Link to="/"><h1>Noteful</h1></Link>
+        <ErrorPage>
         <Switch>
           <Route exact path='/' 
             component={MainPage} 
@@ -87,8 +91,15 @@ export default class App extends Component {
           <Route exact path='/Notes/:noteId' 
             component={NotePage}
             />
+          <Route exact path='/NoteForm' 
+            component={AddNote}
+            />
+          <Route exact path='/FolderForm' 
+            component={AddFolder}
+            />
           <Route component={NotFound} />
         </Switch>
+        </ErrorPage>
     </div>
     </UserContext.Provider>
     )

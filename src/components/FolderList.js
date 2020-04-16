@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom';
 import UserContext from '../UserContext';
 import Folder from './Folder'
 
@@ -19,7 +20,7 @@ export default class FolderList extends Component {
     return (
       <div>
         {foldersList}
-        <button>add folder</button>
+        <button><Link to="/FolderForm">Add A Folder</Link></button>
       </div>
     )
   }
