@@ -140,7 +140,6 @@ export default class App extends Component {
     const folderId = this.state.folders.find(folder => folder.name === folderName).id;
     const date = new Date();
     const modified = date.toString();
-    console.log(folderId);
     const post = JSON.stringify({name, content, modified, folderId});
 
     const options = {
@@ -152,14 +151,13 @@ export default class App extends Component {
     };
     fetch(`http://localhost:9090/notes/`, options)
       .then(res => res.json())
-      .then(() => this.setState({notes: [...this.state.notes, {name, content, modified, folderId}]}));
+      .then((note) => this.setState({notes: [...this.state.notes, note]}));
       
   }
 
   handlePostFolder = () => {
     let name = this.state.folderName.value;
     let newname = JSON.stringify({name});
-    console.log(newname)
     const options = {
       method: 'POST',
       headers: {
@@ -169,7 +167,7 @@ export default class App extends Component {
     };
     fetch(`http://localhost:9090/folders/`, options)
       .then(res => res.json())
-      .then(() => this.setState({folders: [...this.state.folders, {name}]}));
+      .then((folder) => this.setState({folders: [...this.state.folders, folder]}));
       
   }
 

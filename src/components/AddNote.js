@@ -26,8 +26,6 @@ export default class AddNote extends Component {
         return (<option value={folder.name}>{folder.name}</option>)
      })
 
-     console.log(options);
-
     return (
       <div className="add-note">
         <form name="note-form" id ="note-form">
