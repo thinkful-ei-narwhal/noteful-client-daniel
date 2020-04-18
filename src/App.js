@@ -20,6 +20,7 @@ export default class App extends Component {
     noteName: {value: '', touched: false},
     noteContent: {value: '', touched: false},
     folderTo: {value: '', touched: false},
+    error: null,
   }
 
   componentDidMount() {
@@ -40,7 +41,7 @@ export default class App extends Component {
         return data})
       .then(folders => this.setState({folders: folders}))
       .catch((err) => {
-        console.log(err);
+        this.setState({error: err});
       });
 
     fetch('http://localhost:9090/notes')
@@ -59,7 +60,7 @@ export default class App extends Component {
         return data})
       .then(notes => this.setState({notes: notes}))
       .catch((err) => {
-        console.log(err);
+        this.setState({error: err});
       });
 
   }
