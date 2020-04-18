@@ -4,7 +4,6 @@ export default class ErrorPage extends Component {
   state = {error: null};
 
   static getDerivedStateFormError(error) {
-    console.error(error);
     return (error)
   }
   render() {
