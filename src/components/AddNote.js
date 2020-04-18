@@ -21,9 +21,9 @@ export default class AddNote extends Component {
       onPostNote,
      } = this.context;
 
-     const options = folders.map(folder => {
+     const options = folders.map((folder, i )=> {
 
-        return (<option value={folder.name}>{folder.name}</option>)
+        return (<option key={i} value={folder.name}>{folder.name}</option>)
      })
 
     return (
