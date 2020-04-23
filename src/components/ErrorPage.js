@@ -10,8 +10,8 @@ export default class ErrorPage extends Component {
     if (this.state.error) {
       return (
         <main className="error-page">
-        <h1>Something seems to have gone wrong</h1>
-        <p>Try refreshing the page or returning to HOME</p>
+          <h1>Something seems to have gone wrong</h1>
+          <p>Try refreshing the page or returning to HOME</p>
         </main>
       )
     }

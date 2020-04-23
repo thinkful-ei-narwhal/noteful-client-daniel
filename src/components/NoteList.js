@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
 
@@ -20,9 +20,9 @@ export default class NoteList extends Component {
     })
 
     return (
-      <div className="notesList">
+      <Fragment className="notesList">
         {notesList}
-      </div>
+      </Fragment>
     )
   }
 }

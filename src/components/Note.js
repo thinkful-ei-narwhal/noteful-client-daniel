@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import UserContext from '../UserContext';
@@ -14,16 +14,16 @@ export default class Note extends Component {
 
     const modified= new Date(this.props.modified);
     return (
-      <div key={this.props.id} className= "note">
-      <Link to= {`/Notes/${this.props.id}`}>
-        <h2>{this.props.name}</h2>
-      </Link>
-      <p>modified on:{modified.getDate()}/{modified.getMonth()}/{modified.getFullYear()}</p>
-        <button onClick={() => {
-          this.props.history.push('/');
-          onDelete(this.props.id)}
-        }>Delete Note</button>
-      </div> 
+      <Fragment key={this.props.id} className= "note">
+        <Link to= {`/Notes/${this.props.id}`}>
+          <h2>{this.props.name}</h2>
+        </Link>
+        <p>modified on:{modified.getDate()}/{modified.getMonth()}/{modified.getFullYear()}</p>
+          <button onClick={() => {
+            this.props.history.push('/');
+            onDelete(this.props.id)}
+          }>Delete Note</button>
+      </Fragment> 
     )
   }
 }

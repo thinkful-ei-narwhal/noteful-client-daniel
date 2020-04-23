@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 export class NotFound extends Component {
   render() {
     return (
-      <div>
+      <Fragment>
         <p>404 Not Found</p>
-      </div>
+      </Fragment>
     )
   }
 }

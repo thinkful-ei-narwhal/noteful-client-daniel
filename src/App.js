@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import NotFound from './components/NotFound';
 import MainPage from './components/MainPage';
 import FolderPage from './components/FolderPage';
@@ -194,7 +194,7 @@ export default class App extends Component {
         onPostFolder: this.handlePostFolder,
         onDelete: this.handleDeleteItem,
       }}>
-      <div>
+      <Fragment>
         <Link to="/"><h1>Noteful</h1></Link>
         <ErrorPage>
         <Switch>
@@ -216,7 +216,7 @@ export default class App extends Component {
           <Route component={NotFound} />
         </Switch>
         </ErrorPage>
-    </div>
+    </Fragment>
     </UserContext.Provider>
     )
   }
