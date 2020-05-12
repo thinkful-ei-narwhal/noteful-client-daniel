@@ -20,8 +20,9 @@ export default class Note extends Component {
         </Link>
         <p>modified on:{modified.getDate()}/{modified.getMonth()}/{modified.getFullYear()}</p>
           <button onClick={() => {
+            onDelete(this.props.id)
             this.props.history.push('/');
-            onDelete(this.props.id)}
+            }
           }>Delete Note</button>
       </div> 
     )

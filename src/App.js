@@ -145,6 +145,8 @@ export default class App extends Component {
 
   handleDeleteItem = (id) => {
 
+    console.log('deleted accessed');
+
     const options = {
       method: 'DELETE',
       headers: {
@@ -153,7 +155,6 @@ export default class App extends Component {
       }
       };
     fetch(`${config.API_ENDPOINT}/notes/${id}`, options)
-      .then(res => res.json())
       .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
 
