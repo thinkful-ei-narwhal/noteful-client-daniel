@@ -156,19 +156,6 @@ export default class App extends Component {
       .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
 
-  // handleDeleteFolder = (id) => {
-
-  //   const options = {
-  //     method: 'DELETE',
-  //     headers: {
-  //       'content-type': 'application/json',
-  //       'Authorization': `Bearer ${config.API_KEY}`
-  //     }
-  //     };
-  //   fetch(`${config.API_ENDPOINT}/folders/${id}`, options)
-  //     .then(() => this.setState({folders: this.state.folders.filter(folder => folder.id !== id)}));
-  // }
-
   handlePostNote = () => {
     const note_name = this.state.noteName.value;
     const content = this.state.noteContent.value;
