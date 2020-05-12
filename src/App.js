@@ -145,8 +145,6 @@ export default class App extends Component {
 
   handleDeleteItem = (id) => {
 
-    console.log('deleted accessed');
-
     const options = {
       method: 'DELETE',
       headers: {
@@ -158,6 +156,19 @@ export default class App extends Component {
       .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
 
+  // handleDeleteFolder = (id) => {
+
+  //   const options = {
+  //     method: 'DELETE',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       'Authorization': `Bearer ${config.API_KEY}`
+  //     }
+  //     };
+  //   fetch(`${config.API_ENDPOINT}/folders/${id}`, options)
+  //     .then(() => this.setState({folders: this.state.folders.filter(folder => folder.id !== id)}));
+  // }
+
   handlePostNote = () => {
     const note_name = this.state.noteName.value;
     const content = this.state.noteContent.value;
@@ -168,7 +179,6 @@ export default class App extends Component {
     const modified = time.toString();
     const post = JSON.stringify({note_name, content, modified, folderid});
 
-    console.log(post);
     const options = {
       method: 'POST',
       headers: {
@@ -186,7 +196,6 @@ export default class App extends Component {
   handlePostFolder = () => {
     let folder_name = this.state.folderName.value;
     let newname = JSON.stringify({folder_name});
-    console.log(newname);
     const options = {
       method: 'POST',
       headers: {
