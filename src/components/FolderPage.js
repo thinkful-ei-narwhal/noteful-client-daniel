@@ -13,7 +13,7 @@ export default class FolderPage extends Component {
 
     const {notes} = this.context;
 
-    const folderNoteList = notes.filter(notes => notes.folderId === this.props.match.params.folderId)
+    const folderNoteList = notes.filter(note => note.folderid === Number(this.props.match.params.folderId))
 
     return (
       <main>

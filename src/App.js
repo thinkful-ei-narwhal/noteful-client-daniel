@@ -6,6 +6,7 @@ import NotePage from './components/NotePage';
 import AddFolder from './components/AddFolder';
 import AddNote from './components/AddNote';
 import ErrorPage from './components/ErrorPage';
+import config from './config';
 import {Route, Switch, Link} from 'react-router-dom';
 import UserContext from './UserContext';
 
@@ -25,7 +26,13 @@ export default class App extends Component {
 
   componentDidMount() {
     let error;
-    fetch('http://localhost:9090/folders')
+    fetch(`${config.API_ENDPOINT}/folders`, {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${config.API_KEY}`
+      }
+      })
       .then(res => {
         if (!res.ok) {
           error = { code: res.status};
@@ -37,14 +44,19 @@ export default class App extends Component {
           error.message = data.message;
           return Promise.reject(error);
         }
-
         return data})
       .then(folders => this.setState({folders: folders}))
       .catch((err) => {
         this.setState({error: err});
       });
 
-    fetch('http://localhost:9090/notes')
+      fetch(`${config.API_ENDPOINT}/notes`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${config.API_KEY}`
+        }
+        })
       .then(res => {
         if (!res.ok) {
           error = { code: res.status};
@@ -109,6 +121,13 @@ export default class App extends Component {
       }
   }
 
+  validateFolderTo = () => {
+    let folderTo = this.state.folderTo.value;
+    if (!folderTo) {
+      return 'you gotta choose a folder!'
+    } 
+  }
+
   validateNoteContent = () => {
     let noteContent= this.state.noteContent.value;
     noteContent = noteContent.toString().trim();
@@ -128,45 +147,54 @@ export default class App extends Component {
 
     const options = {
       method: 'DELETE',
-    };
-    fetch(`http://localhost:9090/notes/${id}`, options)
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${config.API_KEY}`
+      }
+      };
+    fetch(`${config.API_ENDPOINT}/notes/${id}`, options)
       .then(res => res.json())
       .then(() => this.setState({notes: this.state.notes.filter(note => note.id !== id)}));
   }
 
   handlePostNote = () => {
-    const name = this.state.noteName.value;
+    const note_name = this.state.noteName.value;
     const content = this.state.noteContent.value;
     const folderName = this.state.folderTo.value;
-    const folderId = this.state.folders.find(folder => folder.name === folderName).id;
+    const folderid = this.state.folders.find(folder => folder.folder_name === folderName).id;
     const date = new Date();
-    const modified = date.toString();
-    const post = JSON.stringify({name, content, modified, folderId});
+    const time = date.toISOString();
+    const modified = time.toString();
+    const post = JSON.stringify({note_name, content, modified, folderid});
 
+    console.log(post);
     const options = {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${config.API_KEY}`
         },
       body: post,
     };
-    fetch(`http://localhost:9090/notes/`, options)
+    fetch(`${config.API_ENDPOINT}/notes`, options)
       .then(res => res.json())
       .then((note) => this.setState({notes: [...this.state.notes, note]}));
       
   }
 
   handlePostFolder = () => {
-    let name = this.state.folderName.value;
-    let newname = JSON.stringify({name});
+    let folder_name = this.state.folderName.value;
+    let newname = JSON.stringify({folder_name});
+    console.log(newname);
     const options = {
       method: 'POST',
       headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${config.API_KEY}`
       },
       body: newname,
     };
-    fetch(`http://localhost:9090/folders/`, options)
+    fetch(`${config.API_ENDPOINT}/folders`, options)
       .then(res => res.json())
       .then((folder) => this.setState({folders: [...this.state.folders, folder]}));
       
@@ -174,7 +202,6 @@ export default class App extends Component {
 
 
   render() { // so we made context.  When we use component={component}, that automatically creates render props.  they are still props.
-
     return (
       <UserContext.Provider value = {{
         folders: this.state.folders,
@@ -189,6 +216,7 @@ export default class App extends Component {
         setFolderTo: this.setFolderTo,
         validateFolderName: this.validateFolderName,
         validateNoteName: this.validateNoteName,
+        validateFolderTo: this.validateFolderTo,
         validateNoteContent: this.validateNoteContent,
         onPostNote: this.handlePostNote,
         onPostFolder: this.handlePostFolder,

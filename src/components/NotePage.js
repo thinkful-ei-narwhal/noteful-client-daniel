@@ -11,9 +11,9 @@ export default class NotePage extends Component {
 
     const {folders, notes} = this.context;
 
-    const shownNote = notes.find(note => note.id === this.props.match.params.noteId);
+    const shownNote = notes.find(note => note.id === Number(this.props.match.params.noteId));
 
-    const shownFolder = folders.find(folder => folder.id === shownNote.folderId);
+    const shownFolder = folders.find(folder => folder.id === shownNote.folderid);
     
      return (
        <main>

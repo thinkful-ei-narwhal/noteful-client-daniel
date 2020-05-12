@@ -13,7 +13,7 @@ export default class FolderList extends Component {
 
      const foldersList = folders.map((folder, i) => {
 
-      return <Folder key={i} id={folder.id} name={folder.name}/>
+      return <Folder key={i} id={folder.id} folder_name={folder.folder_name}/>
     })
     
 

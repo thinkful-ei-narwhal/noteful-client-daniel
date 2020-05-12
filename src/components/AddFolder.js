@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import UserContext from '../UserContext';
 import "./AddFolder.css";
 
@@ -17,7 +17,7 @@ export default class AddFolder extends Component {
 
 
     return (
-      <Fragment className="add-folder">
+      <div className="add-folder">
         <form name="folder-form" id ="folder-form">
           <label htmlFor="folder-name">Name of New Folder:</label><br />
           {folderName.touched && <p className="error">{validateFolderName()}</p>}
@@ -37,7 +37,7 @@ export default class AddFolder extends Component {
             onPostFolder()}}>Submit</button> 
           </form>
         <button onClick={() => this.props.history.goBack()}><h2>BACK</h2></button>
-      </Fragment>
+      </div>
     )
   }
 }

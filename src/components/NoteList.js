@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component} from 'react';
 import PropTypes from 'prop-types';
 import Note from './Note';
 
@@ -11,18 +11,18 @@ export default class NoteList extends Component {
       return (<Note 
       key={i}
       id={note.id} 
-      name={note.name} 
+      note_name={note.note_name} 
       modified={note.modified}
-      folderID={note.folderID}
+      folderid={note.folderid}
       content={note.content}
       history={this.props.history}/>
       )
     })
 
     return (
-      <Fragment className="notesList">
+      <div className="notesList">
         {notesList}
-      </Fragment>
+      </div>
     )
   }
 }
